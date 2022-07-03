@@ -22,7 +22,7 @@ tasks.test {
 }
 
 group = "com.azharkova.di.inject"
-version = "0.1.2"
+version = "0.1.3"
 
 publishing {
   publications {

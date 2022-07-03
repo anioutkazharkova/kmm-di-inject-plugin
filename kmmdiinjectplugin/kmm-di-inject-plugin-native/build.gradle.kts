@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.azharkova.di.inject"
-version = "0.1.2"
+version = "0.1.3"
 
 
 dependencies {
@@ -16,6 +16,7 @@ dependencies {
   kapt("com.google.auto.service:auto-service:1.0-rc7")
   compileOnly("com.google.auto.service:auto-service-annotations:1.0-rc7")
   implementation(project(":kmm-di-inject-runtime"))
+  //implementation("io.github.anioutkazharkova:di-multiplatform-lib:1.0.4.5")
 }
 
 

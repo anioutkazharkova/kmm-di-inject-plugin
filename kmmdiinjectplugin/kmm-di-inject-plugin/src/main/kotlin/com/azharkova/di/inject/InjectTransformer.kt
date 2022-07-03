@@ -41,6 +41,10 @@ class InjectTransformer(
             parameters.size == 1 && parameters[0].type == pluginContext.irBuiltIns.anyNType
         }
 
+    override fun visitClassNew(declaration: IrClass): IrStatement {
+        return super.visitClassNew(declaration)
+    }
+
     override fun visitFunctionNew(declaration: IrFunction): IrStatement {
         if (declaration.hasAnnotation(injectServiceAnnotation)) {
             declaration.body = makeResolveBody(declaration)

@@ -22,9 +22,9 @@ class InjectDIComponentRegistrar(
     project: MockProject,
     configuration: CompilerConfiguration
   ) {
-
-      IrGenerationExtension.registerExtension(project,ContainerGenerationExtension())
-      IrGenerationExtension.registerExtension(project, InjectDIIrGenerationExtension())
+IrGenerationExtension.registerExtension(project, DIGenerationExtension())
+     // IrGenerationExtension.registerExtension(project,ContainerGenerationExtension())
+     // IrGenerationExtension.registerExtension(project, InjectDIIrGenerationExtension())
   }
 }
 
