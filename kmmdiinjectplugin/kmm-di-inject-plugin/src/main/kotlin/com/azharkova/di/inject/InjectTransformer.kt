@@ -35,9 +35,6 @@ class InjectTransformer(
     private val resolve =
         pluginContext.referenceClass(FqName("com.azharkova.kmmdi.shared.config.ConfigurationApp"))!!
 
-    //private val appContainer =
-      //  pluginContext.referenceProperties(FqName("com.azharkova.kmmdi.shared.config.ConfigurationApp.appContainer")).firstOrNull()?.owner
-
     val funPrintln = pluginContext.referenceFunctions(FqName("kotlin.io.println"))
         .single {
             val parameters = it.owner.valueParameters
@@ -49,31 +46,6 @@ class InjectTransformer(
             declaration.body = makeResolveBody(declaration)
         }
         return super.visitFunctionNew(declaration)
-    }
-
-
-    private fun irDebug(
-        function: IrFunction,
-        body: IrBody?
-    ): IrBlockBody {
-
-        val field = makeLazyField(function, function.parentClassOrNull!!)
-        val getValueFunction =
-            field.type.getClass()!!.properties.first { it.name.identifier == "value" }.getter!!
-        return DeclarationIrBuilder(pluginContext, function.symbol).irBlockBody {
-            +irReturn(
-                irCall(getValueFunction.symbol, function.returnType).also {
-                    it.dispatchReceiver = irGetField(
-                        IrGetValueImpl(
-                            startOffset,
-                            endOffset,
-                            (function.dispatchReceiverParameter
-                                ?: function.parentClassOrNull!!.thisReceiver)!!.symbol
-                        ), field
-                    )
-                }
-            )
-        }
     }
 
     private fun makeResolveBody(
