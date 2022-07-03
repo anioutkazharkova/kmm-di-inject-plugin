@@ -77,10 +77,6 @@ class ContainerClassLoweringPass(val pluginContext: IrPluginContext) : ClassLowe
                     +statement
                 }
             }
-            +irCall(funPrintln).also {
-                it.putValueArgument(0,irString(setupFunc!!.dump()))
-                //it.dispatchReceiver = funPrintln.
-            }
             val classDescriptor = pluginContext.referenceClass(
                 clazz.fqNameWhenAvailable!!
             )
@@ -120,7 +116,6 @@ class ContainerClassLoweringPass(val pluginContext: IrPluginContext) : ClassLowe
 
     inline fun buildLambda(
         returnType: IrType,
-        funBuilder: IrFunctionBuilder.() -> Unit = {},
         funApply: IrBlockBodyBuilder.() -> Unit
     ): IrSimpleFunction = pluginContext.irFactory.buildFun {
         name = Name.special("<anonymous>")

@@ -22,12 +22,9 @@ class InjectDIComponentRegistrar(
     project: MockProject,
     configuration: CompilerConfiguration
   ) {
-    val enabled = configuration.get(InjectDICommandLineProcessor.ARG_ENABLED, defaultEnabled)
-    if (enabled) {
 
       IrGenerationExtension.registerExtension(project,ContainerGenerationExtension())
       IrGenerationExtension.registerExtension(project, InjectDIIrGenerationExtension())
-    }
   }
 }
 

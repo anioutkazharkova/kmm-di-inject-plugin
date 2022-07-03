@@ -9,8 +9,6 @@ import org.jetbrains.kotlin.name.FqName
 
 class InjectDIIrGenerationExtension : IrGenerationExtension {
   override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
-    val typeAnyNullable = pluginContext.irBuiltIns.anyNType
-
     val injectServiceAnnotation = pluginContext.referenceClass(FqName("com.azharkova.di.inject.InjectService"))!!
 
     moduleFragment.transform(InjectTransformer(pluginContext, injectServiceAnnotation), null)
